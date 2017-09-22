@@ -32,9 +32,9 @@ class DictionaryRepository @Inject()(dbapi: DBApi)(implicit ec: DatabaseExecutio
         'sign -> entry.chinese,
         'prononciation -> entry.prononciation
       ).executeInsert()
-    } match {
+    } /*match {
       case Some(chineseId) => insertEnglishWords(entry.english, chineseId)
-    }
+    }*/
 
   }(ec)
 
