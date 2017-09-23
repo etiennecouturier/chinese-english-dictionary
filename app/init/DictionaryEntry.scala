@@ -32,28 +32,7 @@ class DictionaryRepository @Inject()(dbapi: DBApi)(implicit ec: DatabaseExecutio
         'sign -> entry.chinese,
         'prononciation -> entry.prononciation
       ).executeInsert()
-    } /*match {
-      case Some(chineseId) => insertEnglishWords(entry.english, chineseId)
-    }*/
-
-  }(ec)
-
-  def insertEnglishWords (englishWords:List[String], chineseId:Any): Unit = {
-    val insertEnglishQuery = SQL("""
-                        insert into ENGLISH values (
-                        (nextval('english_seq')),
-                          {word}, {chinese_id}
-                        )
-                        """)
-
-    for (englishWord <- englishWords) {
-      db.withConnection { implicit connection =>
-        insertEnglishQuery.on(
-          'word -> englishWord,
-          'chinese_id -> chineseId.toString
-        ).executeInsert()
-      }
     }
-  }
+  }(ec)
 
 }
