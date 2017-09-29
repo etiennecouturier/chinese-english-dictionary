@@ -1,9 +1,0 @@
-CREATE TABLE DICT(
-   id INT NOT NULL,
-   chinese CHAR(1000) NOT NULL,
-   prononciation CHAR(100) NOT NULL,
-   english CHAR(1000) NOT NULL,
-   PRIMARY KEY (id)
-);
-
-CREATE SEQUENCE dict_seq START 1;

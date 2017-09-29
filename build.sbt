@@ -14,11 +14,14 @@ libraryDependencies ++= Seq(
   jdbc,
   guice,
   evolutions,
-  //"postgresql" % "postgresql" % "9.4.1208-jdbc42-atlassian-hosted",
-  "com.h2database" % "h2" % "1.4.194",
   "com.typesafe.play" %% "anorm" % "2.5.3",
   "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.0" % Test
 )
 
-libraryDependencies += "org.postgresql" % "postgresql" % "42.1.4"
+//libraryDependencies += "org.postgresql" % "postgresql" % "42.1.4"
+
+libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.44"
+
+
+javaOptions in Test += "-Dconfig.file=conf/application.test.conf"
 

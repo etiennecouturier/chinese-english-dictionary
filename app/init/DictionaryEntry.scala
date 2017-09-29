@@ -20,15 +20,14 @@ class DictionaryRepository @Inject()(dbapi: DBApi)(implicit ec: DatabaseExecutio
 
   def insert(entry: DictionaryEntry) = Future {
 
-    val insertChineseQuery = SQL("""
-                                    insert into DICT values (
-                                    (nextval('dict_seq')),
-                                      {chinese}, {prononciation}, {english}
-                                    )
-                                  """)
-
     db.withConnection { implicit connection =>
-      insertChineseQuery.on(
+      SQL(
+        """
+          insert into dict values (
+            {chinese}, {prononciation}, {english}
+          )
+        """
+      ).on(
         'chinese -> entry.chinese,
         'prononciation -> entry.prononciation,
         'english -> entry.english.mkString(", ")

@@ -5,7 +5,6 @@ import play.test.WithApplication
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatestplus.play._
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
-import play.api.db._
 
 @RunWith(classOf[JUnitRunner])
 class DictionaryDataSaverSpec extends PlaySpec with GuiceOneAppPerSuite with ScalaFutures {
@@ -15,27 +14,9 @@ class DictionaryDataSaverSpec extends PlaySpec with GuiceOneAppPerSuite with Sca
 
   def dictionaryDataSaver: DictionaryDataSaver = app.injector.instanceOf(classOf[DictionaryDataSaver])
 
-  /*
-  def withMyDatabase[T](block: Database => T) = {
-    Databases.withDatabase(
-      driver = "com.mysql.jdbc.Driver",
-      url = "jdbc:mysql://localhost/test",
-      name = "mydatabase",
-      config = Map(
-        "user" -> "test",
-        "password" -> "secret"
-      )
-    )(block)
-  }
-
-  withMyDatabase { database =>
-    val connection = database.getConnection()
-  }
-  */
-
   "DictionaryDataSaver" should {
 
-    "save dictionary entries into the persistence layer" in new WithApplication{
+    "save dictionary entries into the persistence layer" in new WithApplication {
       dictionaryDataSaver.saveDictionaryData(testFilePath)
     }
 
