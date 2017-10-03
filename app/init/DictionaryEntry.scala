@@ -7,8 +7,6 @@ import play.api.db._
 
 import scala.language.postfixOps
 
-import scala.concurrent.Future
-
 case class DictionaryEntry (chinese:String, prononciation:String, english:List[String]) {
 
 }
@@ -18,12 +16,16 @@ class DictionaryRepository @Inject()(dbapi: DBApi)(implicit ec: DatabaseExecutio
 
   private val db = dbapi.database("default")
 
-  def insert(entry: DictionaryEntry) = Future {
+  def search(searchCriteria : String): Unit = {
+
+  }
+
+  def insert(entry: DictionaryEntry) {
 
     db.withConnection { implicit connection =>
       SQL(
         """
-          insert into dict values (
+          insert into dict(chinese, prononciation, english) values (
             {chinese}, {prononciation}, {english}
           )
         """
@@ -33,6 +35,6 @@ class DictionaryRepository @Inject()(dbapi: DBApi)(implicit ec: DatabaseExecutio
         'english -> entry.english.mkString(", ")
       ).executeInsert()
     }
-  }(ec)
+  }
 
 }

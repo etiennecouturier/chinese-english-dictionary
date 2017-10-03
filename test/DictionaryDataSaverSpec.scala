@@ -17,7 +17,7 @@ class DictionaryDataSaverSpec extends PlaySpec with GuiceOneAppPerSuite with Sca
   "DictionaryDataSaver" should {
 
     "save dictionary entries into the persistence layer" in new WithApplication {
-      dictionaryDataSaver.saveDictionaryData(testFilePath)
+      dictionaryDataSaver.saveDictionaryData(filePath)
     }
 
   }
